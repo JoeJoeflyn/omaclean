@@ -20,17 +20,27 @@ A service plugin for [Omarchy](https://omarchy.org/) that locks keyboard input s
 
 ## Installation
 
+Two steps. Copy-paste these into your terminal:
+
 ```bash
-# 1. Install the service plugin
+# Step 1 — install the service
 omarchy plugin add https://github.com/JoeJoeflyn/omaclean --yes
 
-# 2. Add the indicator to your indicators widget
+# Step 2 — add the indicator to your bar
 ~/.config/omarchy/plugins/omaclean/setup.sh
 ```
 
-That's it. The setup script clones `omarchy.indicators`, copies `CleanKbd.qml` into it, and restarts the shell.
+Or tell your AI assistant (Devin, Claude, etc.):
 
-Hover the center bar section to reveal the keyboard icon beside the other indicators. Click to lock, click again to unlock.
+> Install the omaClean Omarchy plugin from https://github.com/JoeJoeflyn/omaclean — run the plugin add command then the setup.sh script.
+
+The setup script automatically:
+1. Clones `omarchy.indicators` as `giogio.indicators`
+2. Copies `CleanKbd.qml` into it
+3. Adds CleanKbd to the indicator list
+4. Enables the service and restarts the shell
+
+After install, hover the center bar section (around the clock) to reveal the keyboard icon beside NightLight and StayAwake. Click it to lock the keyboard, click again to unlock.
 
 ---
 
