@@ -5,6 +5,8 @@ A service + bar widget plugin for [Omarchy](https://omarchy.org/) that locks key
 [![Omarchy Plugin](https://img.shields.io/badge/omarchy-plugin-blue.svg)](https://omarchyplugins.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+![omaClean Preview](preview.png)
+
 ---
 
 ## 🌟 Features
