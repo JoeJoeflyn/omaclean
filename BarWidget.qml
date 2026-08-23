@@ -1,7 +1,6 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
-import Quickshell.Io
 import qs.Commons
 import qs.Ui
 
@@ -12,40 +11,31 @@ BarWidget {
   property bool isLocked: false
 
   function toggle() {
-    if (root.isLocked) root.deactivate()
-    else root.activate()
+    root.isLocked = !root.isLocked
+    if (root.isLocked) {
+      Qt.callLater(function() {
+        if (cleanOverlayWindow) keyTrap.forceActiveFocus()
+      })
+    }
   }
 
-  function activate() {
-    root.isLocked = true
-    Qt.callLater(function() {
-      if (cleanOverlayWindow) keyTrap.forceActiveFocus()
-    })
-  }
-
-  function deactivate() {
-    root.isLocked = false
-  }
-
-  IpcHandler {
-    target: "omaclean"
-    function toggle() { root.toggle() }
-    function open() { root.activate() }
-    function close() { root.deactivate() }
-  }
-
-  // Exactly like Idle/StayAwake: Hidden when inactive, appears on top center when active!
-  visible: root.isLocked
-  implicitWidth: root.isLocked ? button.implicitWidth : 0
-  implicitHeight: root.isLocked ? button.implicitHeight : 0
+  visible: true
+  implicitWidth: button.implicitWidth
+  implicitHeight: button.implicitHeight
 
   BarIconButton {
     id: button
-    anchors.verticalCenter: parent ? parent.verticalCenter : undefined
+    anchors.fill: parent
+    bar: root.bar
     text: "󰃢"
-    accent: true
-    tooltipText: "Clean Screen Active (Press ESC to unlock)"
-    onClicked: root.toggle()
+    slotSize: Style.bar.statusSlot
+    active: root.isLocked
+    useActiveColor: true
+    tooltipText: root.isLocked ? "Clean Screen Active (Press ESC to unlock)" : "Clean Screen / Keyboard Wipe Protection"
+
+    onPressed: function(b) {
+      root.toggle()
+    }
   }
 
   PanelWindow {
@@ -75,7 +65,7 @@ BarWidget {
       Keys.onPressed: (event) => {
         event.accepted = true
         if (event.key === Qt.Key_Escape) {
-          root.deactivate()
+          root.isLocked = false
         }
       }
 
