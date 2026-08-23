@@ -1,18 +1,14 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import qs.Commons
 import qs.Ui
 
-BarIndicator {
+BarWidget {
   id: root
+  moduleName: "omaclean"
 
   property bool isLocked: false
-
-  active: root.isLocked
-  activeText: "󰃢"
-  inactiveText: "󰃢"
-  activeTooltipText: "Clean Screen Active (Press ESC to unlock)"
-  inactiveTooltipText: "Clean Screen / Keyboard Lock"
 
   function toggle() {
     root.isLocked = !root.isLocked
@@ -23,9 +19,19 @@ BarIndicator {
     }
   }
 
-  onPressed: function() { root.toggle() }
+  implicitWidth: button.implicitWidth
+  implicitHeight: button.implicitHeight
+  visible: true
 
-  // Simple input-blocking overlay
+  BarIconButton {
+    id: button
+    anchors.verticalCenter: parent ? parent.verticalCenter : undefined
+    text: "󰃢"
+    accent: root.isLocked
+    tooltipText: root.isLocked ? "Clean Screen Active (Press ESC to unlock)" : "Clean Screen / Keyboard Lock"
+    onClicked: root.toggle()
+  }
+
   PanelWindow {
     id: cleanOverlayWindow
     visible: root.isLocked
