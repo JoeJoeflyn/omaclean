@@ -1,0 +1,3 @@
+#!/bin/bash
+# omaclean CLI controller
+qs -p /usr/share/omarchy/shell/shell.qml ipc call omaclean toggle 2>/dev/null || true
