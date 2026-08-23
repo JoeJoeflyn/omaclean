@@ -5,6 +5,8 @@ Native status bar indicator and keyboard input protection for [Omarchy](https://
 [![Omarchy Plugin](https://img.shields.io/badge/omarchy-plugin-blue.svg)](https://omarchyplugins.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+![omaClean Preview](preview.png)
+
 ---
 
 ## 🌟 Features
