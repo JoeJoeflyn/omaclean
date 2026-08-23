@@ -31,7 +31,8 @@ BarWidget {
     slotSize: Style.bar.statusSlot
     active: root.isLocked
     useActiveColor: true
-    tooltipText: root.isLocked ? "Clean Screen Active (Press ESC to unlock)" : "Clean Screen / Keyboard Wipe Protection"
+    dimmed: !root.isLocked
+    tooltipText: root.isLocked ? "Clean Screen Active (Press ESC to unlock)" : "Clean Screen"
 
     onPressed: function(b) {
       root.toggle()
