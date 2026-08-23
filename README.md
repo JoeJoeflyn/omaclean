@@ -20,14 +20,13 @@ A service + bar widget plugin for [Omarchy](https://omarchy.org/) that locks key
 
 ## 📥 Installation
 
-One command:
-
 ```bash
-omarchy plugin add https://github.com/JoeJoeflyn/omaclean --yes --enable
+omarchy plugin add https://github.com/JoeJoeflyn/omaclean --yes
+omarchy plugin enable omaclean --section center
 omarchy restart shell
 ```
 
-The indicator appears in the center bar section. Hover to reveal it when inactive, click to lock, click again to unlock.
+The indicator appears in the center bar section beside the clock and other indicators. Hover the center bar to reveal it when inactive, click to lock the keyboard, click again to unlock.
 
 ---
 
