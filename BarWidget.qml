@@ -7,21 +7,21 @@ BarWidget {
 
   readonly property var cleankbdService: bar?.shell?.firstPartyServiceFor("omaclean")
 
-  implicitWidth: Style.bar.statusSlot
-  implicitHeight: Style.bar.statusSlot
+  implicitWidth: button.implicitWidth
+  implicitHeight: button.implicitHeight
 
-  BarIndicator {
-    id: indicator
+  WidgetButton {
+    id: button
     anchors.fill: parent
     bar: root.bar
-    indicatorHost: root
+    text: "󰌌"
     active: root.cleankbdService ? root.cleankbdService.locked : false
-    activeText: "󰌌"
-    inactiveText: "󰌌"
-    activeTooltipText: "Keyboard locked — click to unlock"
-    inactiveTooltipText: "Lock keyboard for cleaning"
+    useActiveColor: true
+    tooltipText: root.cleankbdService && root.cleankbdService.locked
+      ? "Keyboard locked — click to unlock"
+      : "Lock keyboard for cleaning"
 
-    onPressed: function() {
+    onPressed: function(buttonCode) {
       if (root.cleankbdService) root.cleankbdService.toggle()
     }
   }
