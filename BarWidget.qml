@@ -6,22 +6,29 @@ BarWidget {
   moduleName: "omaclean"
 
   readonly property var cleankbdService: bar?.shell?.firstPartyServiceFor("omaclean")
+  property bool indicatorAreaHovered: false
+  property bool indicatorItemHovered: false
+  readonly property bool revealInactiveIndicators: indicatorAreaHovered || indicatorItemHovered || (bar && bar.centerSectionRevealHeld === true && bar.centerHoverRevealSuppressed !== true)
 
-  implicitWidth: button.implicitWidth
-  implicitHeight: button.implicitHeight
+  implicitWidth: indicator.implicitWidth
+  implicitHeight: indicator.implicitHeight
 
-  WidgetButton {
-    id: button
+  HoverHandler {
+    onHoveredChanged: root.indicatorAreaHovered = hovered
+  }
+
+  BarIndicator {
+    id: indicator
     anchors.fill: parent
     bar: root.bar
-    text: "󰌌"
+    indicatorHost: root
     active: root.cleankbdService ? root.cleankbdService.locked : false
-    useActiveColor: true
-    tooltipText: root.cleankbdService && root.cleankbdService.locked
-      ? "Keyboard locked — click to unlock"
-      : "Lock keyboard for cleaning"
+    activeText: "󰌌"
+    inactiveText: "󰌌"
+    activeTooltipText: "Keyboard locked — click to unlock"
+    inactiveTooltipText: "Lock keyboard for cleaning"
 
-    onPressed: function(buttonCode) {
+    onPressed: function() {
       if (root.cleankbdService) root.cleankbdService.toggle()
     }
   }
