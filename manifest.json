@@ -5,36 +5,12 @@
   "version": "1.0.0",
   "author": "JoeJoeflyn",
   "license": "MIT",
-  "description": "Clean Screen & Keyboard Wipe Protection for Omarchy — locks keyboard and screen input so you can wipe down your device safely without triggering accidental actions.",
+  "description": "Simple clean screen & keyboard wipe protection indicator for Omarchy.",
   "repository": "https://github.com/JoeJoeflyn/omaclean",
   "kinds": [
-    "panel",
     "bar-widget"
   ],
-  "keepLoaded": true,
   "entryPoints": {
-    "panel": "Panel.qml",
     "barWidget": "BarWidget.qml"
-  },
-  "barWidget": {
-    "displayName": "Clean Screen",
-    "description": "One-click screen & keyboard wipe protection indicator.",
-    "category": "System",
-    "allowMultiple": false,
-    "defaultSection": "center",
-    "defaults": {
-      "holdDurationSec": 2
-    },
-    "schema": [
-      {
-        "key": "holdDurationSec",
-        "type": "integer",
-        "label": "Hold ESC duration to exit (seconds)",
-        "min": 1,
-        "max": 5,
-        "step": 1,
-        "defaultValue": 2
-      }
-    ]
   }
 }

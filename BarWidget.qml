@@ -1,42 +1,70 @@
 import QtQuick
-import qs.Commons
+import Quickshell
+import Quickshell.Wayland
 import qs.Ui
 
-BarWidget {
+BarIndicator {
   id: root
-  moduleName: "omaclean"
 
-  readonly property var panelItem: {
-    if (!bar || !bar.shell) return null
-    if (typeof bar.shell.thirdPartyPanelFor === "function") {
-      var p = bar.shell.thirdPartyPanelFor("omaclean")
-      if (p) return p
-    }
-    if (typeof bar.shell.firstPartyPanelFor === "function") {
-      return bar.shell.firstPartyPanelFor("omaclean")
-    }
-    return null
-  }
-  readonly property bool isCleanActive: panelItem ? panelItem.active === true : false
+  property bool isLocked: false
+
+  active: root.isLocked
+  activeText: "󰃢"
+  inactiveText: "󰃢"
+  activeTooltipText: "Clean Screen Active (Press ESC to unlock)"
+  inactiveTooltipText: "Clean Screen / Keyboard Lock"
 
   function toggle() {
-    if (panelItem && typeof panelItem.toggle === "function") {
-      panelItem.toggle()
+    root.isLocked = !root.isLocked
+    if (root.isLocked) {
+      Qt.callLater(function() {
+        if (cleanOverlayWindow) keyTrap.forceActiveFocus()
+      })
     }
   }
 
-  implicitWidth: pill.implicitWidth
-  implicitHeight: pill.implicitHeight
-  visible: true
+  onPressed: function() { root.toggle() }
 
-  BarPill {
-    id: pill
-    anchors.verticalCenter: parent.verticalCenter
-    
-    label: "󰃢"
-    accent: root.isCleanActive
-    tooltipText: root.isCleanActive ? "Clean Screen Active (Click to Exit)" : "Clean Screen / Keyboard Wipe Protection"
+  // Simple input-blocking overlay
+  PanelWindow {
+    id: cleanOverlayWindow
+    visible: root.isLocked
+    color: "#000000"
+    anchors { top: true; bottom: true; left: true; right: true }
+    WlrLayershell.layer: WlrLayer.Overlay
+    WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
+    exclusionMode: ExclusionMode.Ignore
 
-    onClicked: root.toggle()
+    Item {
+      id: keyTrap
+      anchors.fill: parent
+      focus: true
+
+      MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        preventStealing: true
+        acceptedButtons: Qt.AllButtons
+        onClicked: (mouse) => { mouse.accepted = true }
+        onPressed: (mouse) => { mouse.accepted = true }
+        onReleased: (mouse) => { mouse.accepted = true }
+      }
+
+      Keys.onPressed: (event) => {
+        event.accepted = true
+        if (event.key === Qt.Key_Escape) {
+          root.isLocked = false
+        }
+      }
+
+      Text {
+        anchors.centerIn: parent
+        text: "󰃢  Clean Screen Active\n\nKeys & touchpad are locked. Wipe safely.\nPress ESC to unlock."
+        color: "#E8E6E3"
+        font.pixelSize: 22
+        horizontalAlignment: Text.AlignHCenter
+        lineHeight: 1.4
+      }
+    }
   }
 }
