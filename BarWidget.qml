@@ -6,19 +6,32 @@ BarWidget {
   id: root
   moduleName: "omaclean"
 
-  readonly property var panelItem: bar?.shell?.firstPartyPanelFor ? bar.shell.firstPartyPanelFor("omaclean") : (bar?.shell?.thirdPartyPanelFor ? bar.shell.thirdPartyPanelFor("omaclean") : null)
+  readonly property var panelItem: {
+    if (!bar || !bar.shell) return null
+    if (typeof bar.shell.thirdPartyPanelFor === "function") {
+      var p = bar.shell.thirdPartyPanelFor("omaclean")
+      if (p) return p
+    }
+    if (typeof bar.shell.firstPartyPanelFor === "function") {
+      return bar.shell.firstPartyPanelFor("omaclean")
+    }
+    return null
+  }
   readonly property bool isCleanActive: panelItem ? panelItem.active === true : false
 
   function toggle() {
-    if (panelItem && panelItem.toggle) {
+    if (panelItem && typeof panelItem.toggle === "function") {
       panelItem.toggle()
     }
   }
 
+  implicitWidth: pill.implicitWidth
+  implicitHeight: pill.implicitHeight
+  visible: true
+
   BarPill {
     id: pill
-    parent: root
-    anchors.verticalCenter: parent ? parent.verticalCenter : undefined
+    anchors.verticalCenter: parent.verticalCenter
     
     label: "󰃢"
     accent: root.isCleanActive
