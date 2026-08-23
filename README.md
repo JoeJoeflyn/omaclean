@@ -63,16 +63,16 @@ Control omaClean from your terminal, scripts, or window manager hotkeys:
 
 ```bash
 # Toggle keyboard lock
-omarchy-shell cleankbd toggle
+omarchy-shell omaclean toggle
 
 # Lock keyboard
-omarchy-shell cleankbd enable
+omarchy-shell omaclean enable
 
 # Unlock keyboard
-omarchy-shell cleankbd disable
+omarchy-shell omaclean disable
 
 # Check status
-omarchy-shell cleankbd status
+omarchy-shell omaclean status
 ```
 
 ---
