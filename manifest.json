@@ -1,16 +1,23 @@
 {
   "schemaVersion": 1,
   "id": "omaclean",
-  "name": "Clean Screen",
+  "name": "Clean Keyboard",
   "version": "1.0.0",
   "author": "JoeJoeflyn",
   "license": "MIT",
-  "description": "Simple clean screen & keyboard wipe protection indicator for Omarchy.",
+  "description": "Lock keyboard for cleaning — one-click input protection so you can wipe down your screen and keyboard without triggering keystrokes.",
   "repository": "https://github.com/JoeJoeflyn/omaclean",
   "kinds": [
     "bar-widget"
   ],
   "entryPoints": {
     "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Clean Keyboard",
+    "description": "Lock keyboard for cleaning with one click.",
+    "category": "Status",
+    "allowMultiple": false,
+    "defaultSection": "right"
   }
 }

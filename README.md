@@ -1,26 +1,80 @@
-# omaClean 🧼 — Clean Screen & Keyboard Wipe Protection for Omarchy
+# omaClean 🧼 — Keyboard Lock for Cleaning
 
-A native top bar indicator and input protection lock for [Omarchy](https://omarchy.org/). Inspired by Mac's *Mole*, **omaClean** disables all keyboard and trackpad inputs with one click so you can wipe down your screen, keyboard, and trackpad safely without triggering unwanted keystrokes or clicks.
+Native status bar indicator and keyboard input protection for [Omarchy](https://omarchy.org/). One click disables your keyboard so you can wipe down your screen and keyboard safely without triggering unwanted keystrokes.
 
----
-
-## ✨ Features
-
-* **🛡️ Total Input Protection**: Intercepts 100% of all keyboard keys, modifiers, and trackpad/mouse clicks.
-* **⏳ Hold to Unlock**: Animated circular progress ring — hold **`ESC` for 2 seconds** to safely exit.
-* **💡 Light & Dark Wipe Modes**: Press **`Space`** to toggle between **Pure Black** (best for spotting dust) and **Bright White** (best for spotting oily smudges).
-* **🎛️ Top Bar Pill**: Clean native indicator that glows in your active theme accent when running.
-* **⌨️ CLI & Shortcut**: Toggle via `omaclean` in terminal or bind to a Hyprland hotkey.
+[![Omarchy Plugin](https://img.shields.io/badge/omarchy-plugin-blue.svg)](https://omarchyplugins.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
-## 🚀 Usage
+## 🌟 Features
 
-* Click the **`󰃢`** icon in your top bar.
-* Or run: `omaclean`
-* **To Exit**: Hold **`ESC`** for 2 seconds.
+- **🛡️ One-Click Keyboard Lock**: Disables keyboard input via `hyprctl` so no keystrokes get through while cleaning.
+- **🎛️ Top Bar Indicator**: Clean native `BarIndicator` that glows in your active theme accent when locked, hidden when inactive (reveals on hover).
+- **💾 Persistent State**: Survives reboots — if you locked your keyboard before restarting, it stays locked on next boot.
+- **⌨️ CLI & IPC**: Toggle from terminal, scripts, or window manager hotkeys.
+
+---
+
+## 📥 Installation
+
+Install omaClean using the Omarchy CLI:
+
+```bash
+omarchy plugin add https://github.com/JoeJoeflyn/omaclean --enable
+omarchy restart shell
+```
+
+### Manual Bar Configuration
+
+Add `"omaclean"` to your desired status bar section in `~/.config/omarchy/shell.json`:
+
+```jsonc
+{
+  "bar": {
+    "sections": {
+      "right": [
+        "omaclean",
+        "omarchy.audio",
+        "omarchy.network",
+        "omarchy.battery"
+      ]
+    }
+  }
+}
+```
+
+---
+
+## 🗑️ Removal & Uninstallation
+
+```bash
+omarchy plugin remove omaclean
+omarchy restart shell
+```
+
+---
+
+## ⌨️ Shell / IPC Commands
+
+Control omaClean from your terminal, scripts, or window manager hotkeys:
+
+```bash
+# Toggle keyboard lock
+omarchy-shell cleankbd toggle
+
+# Lock keyboard
+omarchy-shell cleankbd enable
+
+# Unlock keyboard
+omarchy-shell cleankbd disable
+
+# Check status
+omarchy-shell cleankbd status
+```
 
 ---
 
 ## 📄 License
-MIT © JoeJoeflyn
+
+MIT License © 2026 JoeJoeflyn
