@@ -9,16 +9,16 @@ A service plugin for [Omarchy](https://omarchy.org/) that locks keyboard input s
 
 ## 🌟 Features
 
-- **🛡️ One-Click Keyboard Lock**: Disables keyboard input via `hyprctl` so no keystrokes get through while cleaning.
+- **🛡️ One-Click Keyboard Lock**: Click the indicator to disable keyboard input via `hyprctl` — no keystrokes get through while cleaning.
+- **🖱️ Click to Unlock**: Click the indicator again to re-enable the keyboard. Mouse still works while locked.
 - **💾 Persistent State**: Survives reboots — if you locked your keyboard before restarting, it stays locked on next boot.
-- **🎛️ Native Indicator**: Shows inside the Omarchy indicators widget, beside NightLight, StayAwake, DnD, etc.
-- **⌨️ CLI & IPC**: Toggle from terminal, scripts, or window manager hotkeys.
+- **🎛️ Native Indicator**: Shows inside the Omarchy indicators widget, beside NightLight, StayAwake, DnD, etc. Reveals on hover when inactive.
 
 ---
 
 ## 📥 Installation
 
-omaClean is a **service plugin** — it provides the keyboard lock logic and IPC. The indicator (`CleanKbd.qml`) lives inside the Omarchy indicators widget, just like NightLight and StayAwake.
+omaClean is a **service plugin** — it provides the keyboard lock logic. The indicator (`CleanKbd.qml`) lives inside the Omarchy indicators widget, just like NightLight and StayAwake.
 
 ### Step 1: Install the service
 
@@ -52,27 +52,7 @@ Then edit `<yourname>.indicators/manifest.json` and add the CleanKbd option to t
 omarchy restart shell
 ```
 
-The Clean Keyboard indicator now appears beside NightLight, StayAwake, and the other indicators in your bar.
-
----
-
-## ⌨️ Shell / IPC Commands
-
-Control omaClean from your terminal, scripts, or window manager hotkeys:
-
-```bash
-# Toggle keyboard lock
-omarchy-shell omaclean toggle
-
-# Lock keyboard
-omarchy-shell omaclean enable
-
-# Unlock keyboard
-omarchy-shell omaclean disable
-
-# Check status
-omarchy-shell omaclean status
-```
+The Clean Keyboard indicator now appears beside NightLight, StayAwake, and the other indicators in your bar. Hover the center section to reveal it, click to lock, click again to unlock.
 
 ---
 
