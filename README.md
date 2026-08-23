@@ -1,19 +1,17 @@
 # omaClean 🧼 — Keyboard Lock for Cleaning
 
-Native status bar indicator and keyboard input protection for [Omarchy](https://omarchy.org/). One click disables your keyboard so you can wipe down your screen and keyboard safely without triggering unwanted keystrokes.
+A service plugin for [Omarchy](https://omarchy.org/) that locks keyboard input so you can wipe down your screen and keyboard safely without triggering keystrokes.
 
 [![Omarchy Plugin](https://img.shields.io/badge/omarchy-plugin-blue.svg)](https://omarchyplugins.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-![omaClean Preview](preview.png)
 
 ---
 
 ## 🌟 Features
 
 - **🛡️ One-Click Keyboard Lock**: Disables keyboard input via `hyprctl` so no keystrokes get through while cleaning.
-- **🎛️ Top Bar Indicator**: Clean native `BarIndicator` that glows in your active theme accent when locked, hidden when inactive (reveals on hover).
 - **💾 Persistent State**: Survives reboots — if you locked your keyboard before restarting, it stays locked on next boot.
+- **🎛️ Bar Indicator**: Shows as an indicator inside the Omarchy indicators widget, next to NightLight, StayAwake, DnD, etc.
 - **⌨️ CLI & IPC**: Toggle from terminal, scripts, or window manager hotkeys.
 
 ---
@@ -27,33 +25,7 @@ omarchy plugin add https://github.com/JoeJoeflyn/omaclean --enable
 omarchy restart shell
 ```
 
-### Manual Bar Configuration
-
-Add `"omaclean"` to your desired status bar section in `~/.config/omarchy/shell.json`:
-
-```jsonc
-{
-  "bar": {
-    "sections": {
-      "right": [
-        "omaclean",
-        "omarchy.audio",
-        "omarchy.network",
-        "omarchy.battery"
-      ]
-    }
-  }
-}
-```
-
----
-
-## 🗑️ Removal & Uninstallation
-
-```bash
-omarchy plugin remove omaclean
-omarchy restart shell
-```
+Then add the **Clean keyboard** indicator to your Indicators widget via the Omarchy bar settings, or add `giogio.indicators` (cloned from `omarchy.indicators`) which includes the CleanKbd indicator.
 
 ---
 
@@ -73,6 +45,15 @@ omarchy-shell omaclean disable
 
 # Check status
 omarchy-shell omaclean status
+```
+
+---
+
+## 🗑️ Removal & Uninstallation
+
+```bash
+omarchy plugin remove omaclean
+omarchy restart shell
 ```
 
 ---

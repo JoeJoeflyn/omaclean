@@ -1,3 +1,0 @@
-#!/bin/bash
-# omaclean CLI controller
-omarchy-shell omaclean toggle 2>/dev/null || true
