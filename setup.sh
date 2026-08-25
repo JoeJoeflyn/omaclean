@@ -3,13 +3,23 @@
 set -euo pipefail
 
 PLUGIN_DIR="$(cd "$(dirname "$0")" && pwd)"
-INDICATORS_DIR="$HOME/.config/omarchy/plugins/giogio.indicators"
 
-# Step 1: Clone omarchy.indicators if not already cloned
-if [[ ! -d "$INDICATORS_DIR" ]]; then
+# Detect existing indicators clone (e.g. burninc0de.indicators) or create one
+# The clone is named "<username>.indicators" by `omarchy plugin clone`
+INDICATORS_DIR="$(find "$HOME/.config/omarchy/plugins" -maxdepth 1 -type d -name "*.indicators" 2>/dev/null | head -n1)"
+
+if [[ -z "${INDICATORS_DIR:-}" || ! -d "$INDICATORS_DIR" ]]; then
   echo "Cloning omarchy.indicators..."
   omarchy plugin clone omarchy.indicators
+  INDICATORS_DIR="$(find "$HOME/.config/omarchy/plugins" -maxdepth 1 -type d -name "*.indicators" 2>/dev/null | head -n1)"
 fi
+
+if [[ -z "${INDICATORS_DIR:-}" || ! -d "$INDICATORS_DIR" ]]; then
+  echo "Error: could not find or create indicators plugin directory" >&2
+  exit 1
+fi
+
+echo "Using indicators dir: $INDICATORS_DIR"
 
 # Step 2: Copy CleanKbd.qml into the indicators
 cp "$PLUGIN_DIR/CleanKbd.qml" "$INDICATORS_DIR/indicators/CleanKbd.qml"
