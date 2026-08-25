@@ -35,7 +35,7 @@ Or tell your AI assistant (Devin, Claude, etc.):
 > Install the omaClean Omarchy plugin from https://github.com/JoeJoeflyn/omaclean — run the plugin add command then the setup.sh script.
 
 The setup script automatically:
-1. Clones `omarchy.indicators` as `giogio.indicators`
+1. Clones `omarchy.indicators` as `<username>.indicators` (e.g. `burninc0de.indicators`) if not already present
 2. Copies `CleanKbd.qml` into it
 3. Adds CleanKbd to the indicator list
 4. Enables the service and restarts the shell
@@ -48,7 +48,7 @@ After install, hover the center bar section (around the clock) to reveal the key
 
 ```bash
 omarchy plugin remove omaclean
-omarchy plugin remove giogio.indicators
+omarchy plugin remove $(whoami).indicators  # e.g. burninc0de.indicators
 omarchy restart shell
 ```
 
