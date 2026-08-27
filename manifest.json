@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "omaclean",
   "name": "Clean Keyboard",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "JoeJoeflyn",
   "license": "MIT",
   "description": "Lock keyboard for cleaning — one-click input protection so you can wipe down your screen and keyboard without triggering keystrokes.",
