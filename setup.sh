@@ -4,14 +4,13 @@ set -euo pipefail
 
 PLUGIN_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-# Detect existing indicators clone (e.g. burninc0de.indicators) or create one
-# The clone is named "<username>.indicators" by `omarchy plugin clone`
-INDICATORS_DIR="$(find "$HOME/.config/omarchy/plugins" -maxdepth 1 -type d -name "*.indicators" 2>/dev/null | head -n1)"
+# Detect existing indicators clone (e.g. omaindicators or username.indicators) or create one
+INDICATORS_DIR="$(find "$HOME/.config/omarchy/plugins" -maxdepth 1 -type d \( -name "*indicators*" -o -name "*.indicators" \) 2>/dev/null | head -n1)"
 
 if [[ -z "${INDICATORS_DIR:-}" || ! -d "$INDICATORS_DIR" ]]; then
   echo "Cloning omarchy.indicators..."
   omarchy plugin clone omarchy.indicators
-  INDICATORS_DIR="$(find "$HOME/.config/omarchy/plugins" -maxdepth 1 -type d -name "*.indicators" 2>/dev/null | head -n1)"
+  INDICATORS_DIR="$(find "$HOME/.config/omarchy/plugins" -maxdepth 1 -type d \( -name "*indicators*" -o -name "*.indicators" \) 2>/dev/null | head -n1)"
 fi
 
 if [[ -z "${INDICATORS_DIR:-}" || ! -d "$INDICATORS_DIR" ]]; then
