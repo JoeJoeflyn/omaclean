@@ -2,24 +2,11 @@
   "schemaVersion": 1,
   "id": "omaclean",
   "name": "Clean Keyboard",
-  "version": "1.1.0",
+  "version": "1.0.1",
   "author": "JoeJoeflyn",
   "license": "MIT",
   "description": "Lock keyboard for cleaning — one-click input protection so you can wipe down your screen and keyboard without triggering keystrokes.",
   "repository": "https://github.com/JoeJoeflyn/omaclean",
-  "kinds": [
-    "service",
-    "bar-widget"
-  ],
-  "entryPoints": {
-    "service": "Service.qml",
-    "barWidget": "BarWidget.qml"
-  },
-  "barWidget": {
-    "displayName": "Clean Keyboard",
-    "description": "One-click keyboard lock for cleaning",
-    "category": "Status",
-    "allowMultiple": false,
-    "defaultSection": "center"
-  }
+  "kinds": ["service"],
+  "entryPoints": { "service": "Service.qml" }
 }
