@@ -20,14 +20,10 @@ A service plugin for [Omarchy](https://omarchy.org/) that locks keyboard input s
 
 ## Installation
 
-Two steps. Copy-paste these into your terminal:
+Install in **one command**:
 
 ```bash
-# Step 1 — install the service
-omarchy plugin add https://github.com/JoeJoeflyn/omaclean --yes
-
-# Step 2 — add the indicator to your bar
-~/.config/omarchy/plugins/omaclean/setup.sh
+omarchy plugin add https://github.com/JoeJoeflyn/omaclean --yes && ~/.config/omarchy/plugins/omaclean/setup.sh
 ```
 
 Or tell your AI assistant (Devin, Claude, etc.):
